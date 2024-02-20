@@ -1,0 +1,92 @@
+amespace eldersilvaTP1;
+
+class Pessoa { 
+
+    static int indice = 1; // variável de instancia que controla o preenchimento dos array       
+    static String[] nome = new String[100];
+    static int[] cpf = new int[100];
+    static int[] idade = new int[100];
+    
+    public static void Main(String[] args){
+
+        exibeMenu();
+        selecionaOpcao();
+    }
+
+    private static void registra(){
+        if (indice < 100){
+            Console.WriteLine("Digite o nome do aluno: ");
+            nome[indice] = Console.ReadLine();
+            Console.WriteLine("Digite o CPF: ");
+            cpf[indice] = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a idade: ");
+            idade[indice] = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            indice += 1;
+        }
+        else{
+            Console.WriteLine("Não é possivel cadastrar mais alunos");
+            aguardaleitura();
+        }
+    }
+
+    private static void consultaTurma(){ //método exibe todos os array's nao vazios
+        int indice = 1;
+        while (nome[indice] != null){
+            Console.WriteLine("Aluno: " + nome[indice]);
+            Console.WriteLine("CPF: " + cpf[indice]);
+            Console.WriteLine("Idade: " + idade[indice]);
+            indice += 1;
+            insereLinhas(1);
+        }
+        aguardaleitura();
+    }
+
+    public static void exibeMenu(){
+        Console.WriteLine();
+        Console.WriteLine("*** Sistema de Controle Academico ***");
+        insereLinhas(2);
+        Console.WriteLine("Escolha uma opção");
+        Console.WriteLine("[1] Registrar um novo aluno.");
+        Console.WriteLine("[2] Consultar alunos.");
+        Console.WriteLine("[3] Sair.");
+        insereLinhas(1);
+        Console.WriteLine("Opção:");
+    }
+
+    public static void selecionaOpcao(){
+        int opcao = int.Parse(Console.ReadLine());
+        Console.WriteLine();
+
+        switch (opcao){
+
+            case 1:
+                registra();
+                Main(null);
+                break;
+
+            case 2:
+                consultaTurma();
+                Main(null);
+                break;
+
+            case 3:
+                break;
+
+        }
+
+    }
+
+    public static void insereLinhas(int linhas){
+
+        for (int linha = linhas; linha > 0; linha--){
+            Console.WriteLine();
+        }
+    }
+
+    public static void aguardaleitura(){
+        Console.WriteLine("Pressione qualquer tecla + enter para retornar...");
+        Console.ReadLine();
+    }
+
+}
